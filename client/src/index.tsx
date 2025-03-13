@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import {
   defaultTheme,
   Provider,
+  Flex,
 } from '@adobe/react-spectrum';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -13,7 +14,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider theme={defaultTheme}>
-      <App />
+      <Flex justifyContent="center">
+        <App />
+      </Flex>
     </Provider>
   </React.StrictMode>
 );
