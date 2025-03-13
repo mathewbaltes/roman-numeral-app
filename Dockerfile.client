@@ -1,0 +1,16 @@
+# Use Node.js image for building the app
+FROM node:23 AS builder
+
+WORKDIR /app
+COPY client ./
+RUN npm install
+RUN npm run build
+
+# Use Nginx to serve the static files
+FROM nginx:alpine
+COPY --from=builder /app/build /usr/share/nginx/html
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
+
+EXPOSE 3000
+# Start Nginx and turns the daemon off since in containers it is better to have it at the forefront.
+CMD ["nginx", "-g", "daemon off;"]
