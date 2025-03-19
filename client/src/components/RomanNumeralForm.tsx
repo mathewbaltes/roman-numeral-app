@@ -31,7 +31,7 @@ export const RomanNumeralForm = () => {
         setRomanNumeralValue(value);
     }
 
-    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         // Prevent default browser refresh
         e.preventDefault();
 
@@ -59,22 +59,27 @@ export const RomanNumeralForm = () => {
             // Otherwise, we can handle the error.
             try {
                 // Get the roman numeral request and set the data for the UI.
-                const promise = getRomanNumeral(number);
+                try {
+                    const response = await getRomanNumeral(number);
+                    const data = await response.json();
 
-                promise.then(response => response.json()).then(data => {
                     const rnResponse = data as RomanNumeralResponse;
 
                     if (rnResponse.errors) {
                         setError(rnResponse.errors[0].msg);
                     } else {
-                        setRomanNumeralResult(data.output)
+                        if (rnResponse.output) {
+                            setRomanNumeralResult(rnResponse.output)
+                        } else {
+                            setError(MESSAGES['server'])
+                        }
                     }
-                }).catch((error => {
-                    Sentry.logError(error);
+                } catch (error) {
+                    Sentry.logError(error as Error);
                     setError(MESSAGES['server'])
-                })).finally(() => {
+                } finally {
                     setSubmitting(false);
-                });
+                }
             } catch (e) {
                 Sentry.logError(e as Error);
                 setError(MESSAGES['server'])
