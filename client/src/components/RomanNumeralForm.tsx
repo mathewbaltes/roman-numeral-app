@@ -7,7 +7,7 @@ import {
     TextField,
 } from '@adobe/react-spectrum';
 import getRomanNumeral from 'api/romanNumeral';
-import Sentry from 'logging/sentry';
+import Logger from 'logging/logger';
 import { RomanNumeralResponse } from 'api/types';
 
 // Collection of error messages that we could I18N translate
@@ -75,13 +75,13 @@ export const RomanNumeralForm = () => {
                         }
                     }
                 } catch (error) {
-                    Sentry.logError(error as Error);
+                    Logger.logError(error as Error);
                     setError(MESSAGES['server'])
                 } finally {
                     setSubmitting(false);
                 }
             } catch (e) {
-                Sentry.logError(e as Error);
+                Logger.logError(e as Error);
                 setError(MESSAGES['server'])
                 setSubmitting(false);
             }
