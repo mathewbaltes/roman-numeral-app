@@ -13,11 +13,13 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <Provider theme={defaultTheme}>
-      <Flex justifyContent="center">
-        <App />
-      </Flex>
-    </Provider>
+    <ErrorBoundary>
+      <Provider theme={defaultTheme}>
+        <Flex justifyContent="center">
+          <App />
+        </Flex>
+      </Provider>
+    </ErrorBoundary>
   </React.StrictMode>
 );
 
