@@ -1,4 +1,3 @@
-import './logging/tracing';
 import app from './app';
 import { loggingMiddleware } from './logging/logger';
 

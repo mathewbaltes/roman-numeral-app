@@ -6,12 +6,17 @@
   "scripts": {
     "dev": "nodemon src/index.ts",
     "build": "tsc --outDir build",
-    "start": "node dist/index.js",
+    "start": "node -r ./build/logging/opentelemetry.js build/index.js",
     "test": "jest --detectOpenHandles"
   },
   "author": "Mathew Baltes",
   "license": "ISC",
   "dependencies": {
+    "@opentelemetry/api": "^1.9.0",
+    "@opentelemetry/auto-instrumentations-node": "^0.57.0",
+    "@opentelemetry/sdk-metrics": "^2.0.0",
+    "@opentelemetry/sdk-node": "^0.200.0",
+    "@opentelemetry/sdk-trace-node": "^2.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
