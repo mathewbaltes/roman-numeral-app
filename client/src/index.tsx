@@ -7,6 +7,8 @@ import {
 } from '@adobe/react-spectrum';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import ErrorBoundary from 'components/ErrorBoundary';
+import Logger from 'logging/logger';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -27,4 +29,4 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 // Here we could have this log to some endpoint as well.
-reportWebVitals();
+reportWebVitals(Logger.sendToAnalytics);
