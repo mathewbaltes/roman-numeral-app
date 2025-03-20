@@ -39,7 +39,7 @@ We used Jest since it is an up-to-date testing framework with react-testing-libr
 to easily test our React components.
 
 We did not:
-1) Implement sentry since we need a valid license, however the bones are in place.
+1) Implement logging to a backend, however the bones are in place.
 2) Implement i18n, however this would be recommended since a lot of customers could be international.
 
 Technologies used:
@@ -47,8 +47,8 @@ Technologies used:
 - Adobe Spectrum (for the react component library)
 - Jest / React Testing Library (for testing)
 - Typescript (for type support)
-- Sentry (for logging)
-- Web Vitals (for metrics)
+- Console (For logging. This could be improved with using tools such as Sentry / Rollbar.)
+- Web Vitals (for metrics, provided out of the box for react metrics performance)
 - create-react-app (for the app template)
 
 ### Usage
@@ -62,7 +62,7 @@ that allows developers to build node backed services.  We also added support for
 rate-limiting and endpoint validation using libraries so we could leverage a standard approach for error handling and prevent abuse of our services.
 
 We did not:
-1) Implement sentry since we need a valid license, however the bones are in place. It will support sending all errors to sentry for us to validate.
+1) Implement a backend to consume our metrics, however the bones are in place for us to send anywhere such as datadog / grafana.
 
 Technologies used:
 - NodeJS/Express (for the server and route creation on the endpoints)
@@ -70,6 +70,8 @@ Technologies used:
 - express-validator (for the server endpoint validation)
 - jest (for testing)
 - supertest (for testing the nodejs app directly)
+- winston (for general logging, this allows the nodejs app to output information we find helpful)
+- opentelemetry (for overall tracing / metrics logging for our nodejs app.  This is the standard and is highly configurable)
 
 ### Usage
 To run the application, you can navigate to `client/` directory and run `npm run dev`.
@@ -77,13 +79,7 @@ To run the application, you can navigate to `client/` directory and run `npm run
 To test the application,  you can navigate to `client/` directory and run `npm run test`.
 
 ## Last thoughts
-1) The adobe spectrum library provides the theme through a Provider, 
-we could have also used a react library or code to set the overall app background but out of scope
-for the exercise.
-
-2) We could clean up the docker images so that they do not have test files and non-compiled assets bundled.
-
-3) This could have been built as a server-side rendered application, however with larger applications there could be
+1) This could have been built as a server-side rendered application, however with larger applications there could be
 scaling issues and for this application I chose to keep them separate.
 
 ## Screenshots
